@@ -8,6 +8,9 @@ It also contains Part 2, translated from `WHRECON8830HW2Q1.pdf` and
 `WHRECON8830HW2Q2.pdf`: kernel density estimation, local-constant
 nonparametric regression, bandwidth cross-validation, and bootstrap inference.
 
+Part 3 translates `WHRECON8830PS3.pdf`: a Rust-style bus engine replacement
+model estimated by the nested fixed-point maximum-likelihood algorithm (NFXP).
+
 ## Model
 
 For period `t`, the binary choice follows
@@ -71,6 +74,24 @@ Rscript 02_kernel_density_local_constant_regression.R
 Part 2 writes its cross-validation tables, summary statistics, and plots to
 `results/`.
 
+### Part 3: bus engine replacement NFXP
+
+Run Part 3 with a prepared CSV containing `state`, `replace`, and `increment`:
+
+```sh
+Rscript 03_bus_engine_replacement_nfxp.R bus_panel.csv
+```
+
+The script also accepts the MATLAB-style 128-by-37 raw numeric matrix used in
+the PDF. Because the original `a530875` data are not included, running without
+a CSV estimates the model on a reproducible simulated panel:
+
+```sh
+Rscript 03_bus_engine_replacement_nfxp.R
+```
+
+Part 3 writes parameter estimates and value-function plots to `results/`.
+
 ## Translation notes
 
 The PDF exports contain the MATLAB driver code and printed numerical output,
@@ -97,4 +118,6 @@ MATLAB snippets:
   likelihood, maximum-likelihood estimation, and Monte Carlo analysis.
 - `02_kernel_density_local_constant_regression.R` - Part 2: age density,
   local-constant wage regressions, bandwidth selection, and bootstrap inference.
+- `03_bus_engine_replacement_nfxp.R` - Part 3: bus mileage transitions,
+  expected-value fixed point, replacement probabilities, and NFXP estimation.
 - `.gitignore` - excludes generated estimates and local R session files.
