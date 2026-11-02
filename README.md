@@ -4,6 +4,10 @@ This repository contains a combined R translation of the MATLAB code shown in
 `PS1DGP.pdf` and `PS1LOGLIK.pdf`. It runs a Monte Carlo experiment for a dynamic
 binary-logit model with state dependence.
 
+It also contains Part 2, translated from `WHRECON8830HW2Q1.pdf` and
+`WHRECON8830HW2Q2.pdf`: kernel density estimation, local-constant
+nonparametric regression, bandwidth cross-validation, and bootstrap inference.
+
 ## Model
 
 For period `t`, the binary choice follows
@@ -49,6 +53,24 @@ results <- run_monte_carlo(
 print_results(results)
 ```
 
+### Part 2: kernel and local-constant analysis
+
+Run Part 2 with a CSV containing `age`, `wage`, and `education` columns:
+
+```sh
+Rscript 02_kernel_density_local_constant_regression.R data.csv
+```
+
+Because the PDFs do not include the source data, running without a CSV uses a
+reproducible 1,000-observation example dataset:
+
+```sh
+Rscript 02_kernel_density_local_constant_regression.R
+```
+
+Part 2 writes its cross-validation tables, summary statistics, and plots to
+`results/`.
+
 ## Translation notes
 
 The PDF exports contain the MATLAB driver code and printed numerical output,
@@ -73,4 +95,6 @@ MATLAB snippets:
 
 - `01_dynamic_logit_monte_carlo.R` - Part 1: combined dynamic-logit DGP,
   likelihood, maximum-likelihood estimation, and Monte Carlo analysis.
+- `02_kernel_density_local_constant_regression.R` - Part 2: age density,
+  local-constant wage regressions, bandwidth selection, and bootstrap inference.
 - `.gitignore` - excludes generated estimates and local R session files.
